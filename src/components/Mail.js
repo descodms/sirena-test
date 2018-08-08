@@ -12,19 +12,28 @@ import Typography from '@material-ui/core/Typography';
     message:
     subject: */
 
+const styles = {
+  height: '132.5px',
+};
+const cardContentStyles = {
+  paddingTop: '8px',
+};
+const pStyles = {
+  overflow: 'hidden',
+};
 //Presentational Component Mail
 const Mail = ({ item }) => (
   <div>
     <List>
-      <Card key={item.id} className="item">
-        <CardContent>
+      <Card style={styles} key={item.id} className="item">
+        <CardContent style={cardContentStyles}>
           <Link
             style={{ textDecoration: 'none' }}
             to={`/view/${item.id || 'default'}`}
           >
             <Typography>{item.email || ''}</Typography>
             <Typography>{item.subject || ''}</Typography>
-            <Typography>{item.message || ''}</Typography>
+            <Typography style={pStyles}>{item.message || ''}</Typography>
           </Link>
         </CardContent>
       </Card>

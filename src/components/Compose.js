@@ -194,7 +194,7 @@ class Compose extends Component {
     };
     const textAreaStyle = {
       width: '402px',
-      height: '100px',
+      height: '100%',
       marginLeft: '24px',
     };
     const autoInputStyles = {
