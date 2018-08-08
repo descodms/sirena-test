@@ -1,6 +1,10 @@
 {
   "name": "sirena-test",
   "version": "0.1.0",
+  "author": {
+    "name": "Andy castro",
+    "email": "descodms@gmail.com"
+  },
   "private": true,
   "dependencies": {
     "@material-ui/core": "^1.4.3",
