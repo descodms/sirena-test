@@ -24,20 +24,20 @@ const pStyles = {
 //Presentational Component Mail
 const Mail = ({ item }) => (
   <div>
-    <List>
-      <Card style={styles} key={item.id} className="item">
-        <CardContent style={cardContentStyles}>
-          <Link
-            style={{ textDecoration: 'none' }}
-            to={`/view/${item.id || 'default'}`}
-          >
+    <Link
+      style={{ textDecoration: 'none' }}
+      to={`/view/${item.id || 'default'}`}
+    >
+      <List>
+        <Card style={styles} key={item.id} className="item">
+          <CardContent style={cardContentStyles}>
             <Typography>{item.email || ''}</Typography>
             <Typography>{item.subject || ''}</Typography>
             <Typography style={pStyles}>{item.message || ''}</Typography>
-          </Link>
-        </CardContent>
-      </Card>
-    </List>
+          </CardContent>
+        </Card>
+      </List>
+    </Link>
   </div>
 );
 export default Mail;
