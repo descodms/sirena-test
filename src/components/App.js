@@ -2,10 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Navigation from './Navigation';
 import Login from './Login';
-import Inbox from './Inbox';
 import firebase from 'firebase';
-import base, { firebaseApp } from '../base';
-import Button from '@material-ui/core/Button';
+import { firebaseApp } from '../base';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 // main container component

@@ -1,6 +1,4 @@
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-// import * as actionCreators from '../actions/actionsCreators';
 import App from './App';
 import * as fromItemsActions from '../actions/inbox';
 import * as draftActions from '../actions/draft';
