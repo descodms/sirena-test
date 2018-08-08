@@ -5,11 +5,14 @@ class Draft extends Component {
   componentDidMount = () => {};
 
   render() {
+    const styles = {
+      marginLeft: '40px',
+    };
     if (!this.props.draftItems.draft.length) {
       return (
-        <div>
+        <div style={styles}>
           <h2>Draft</h2>
-          No hay mensajes!
+          No hay mensajes
         </div>
       );
     }

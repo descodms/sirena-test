@@ -71,6 +71,8 @@ class App extends React.Component {
     const divLogout = {
       float: 'right',
     };
+    const divContent = { width: '500px', float: 'left', marginBottom: '40px' };
+
     // 1. Check if they are logged in
     if (!this.state.uid) {
       return (
@@ -79,10 +81,6 @@ class App extends React.Component {
             authenticate={this.authenticate}
             message={this.state.statusLoginMessage}
           />
-          {/* <button onClick={this.logout}>Logout</button> */}
-          <Button onClick={this.logout} variant="contained" color="secondary">
-            Logout
-          </Button>
         </div>
       );
     }
@@ -92,6 +90,7 @@ class App extends React.Component {
       <div style={Styles}>
         <CssBaseline>
           <Navigation logout={this.logout} {...this.props} />
+          <div style={divContent} />
           <div style={divLogout} />
         </CssBaseline>
       </div>

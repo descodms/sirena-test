@@ -29,6 +29,9 @@ class Login extends React.Component {
     const messageStyles = {
       color: 'red',
     };
+    const buttonStyles = {
+      marginLeft: '10px',
+    };
     return (
       <div>
         <Typography style={loginStyles}>Login</Typography>
@@ -40,12 +43,18 @@ class Login extends React.Component {
             placeholder="Email"
           />
           <Input
+            style={buttonStyles}
             name="password"
             inputRef={this.passRef}
             type="password"
             placeholder="Password"
           />
-          <Button color="secondary" variant="contained" type="submit">
+          <Button
+            style={buttonStyles}
+            color="secondary"
+            variant="contained"
+            type="submit"
+          >
             Go to App →
           </Button>
         </form>

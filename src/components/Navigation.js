@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import { Redirect, Route, Link } from 'react-router-dom';
 import Inbox from './Inbox';
 import Draft from './Draft';
 import Sent from './Sent';
@@ -12,19 +12,7 @@ import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { Fragment } from 'react';
 import { Grid } from '@material-ui/core/Grid';
 class Navigation extends React.Component {
-  state = {
-    redirect: false,
-  };
-
-  componentDidMount() {
-    this.setState({ redirect: false });
-  }
-
   render() {
-    const { redirect } = this.state;
-    if (redirect) {
-      return <Redirect to="/inbox" />;
-    }
     const divNav = {
       width: '150px',
       float: 'left',
@@ -79,6 +67,7 @@ class Navigation extends React.Component {
           </Button>
         </div>
         <div style={divContent}>
+          <Redirect to="/inbox" />
           <Route path="/inbox" render={props => <Inbox {...this.props} />} />
           <Route
             path="/view/:mailId"

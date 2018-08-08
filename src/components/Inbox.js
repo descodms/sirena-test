@@ -25,9 +25,14 @@ class Inbox extends Component {
   render() {
     const composeStyles = {
       marginLeft: '50px',
+      float: 'left',
+      width: '500px',
     };
     const divStyles = {
       float: 'left',
+    };
+    const nextStyles = {
+      float: 'right',
     };
     const {
       itemsPaged,
@@ -64,7 +69,7 @@ class Inbox extends Component {
         )}
         {itemsCurrentPage !== itemsLastPage && (
           <Button
-            style={composeStyles}
+            style={nextStyles}
             variant="contained"
             color="secondary"
             onClick={this.handleNext}

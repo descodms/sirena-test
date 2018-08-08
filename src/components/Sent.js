@@ -12,13 +12,13 @@ class Sent extends Component {
   componentDidMount = () => {};
 
   render() {
-    console.log(this.props);
+    const styles = { marginLeft: '40px' };
     const sentItem = localStorage.getItem('sentItems');
     if (!this.props.sentItems.sent.length) {
       return (
-        <div>
+        <div style={styles}>
           <h2>Sent</h2>
-          No hay mensajes!
+          No hay mensajes
         </div>
       );
     }
