@@ -5,7 +5,6 @@ class Draft extends Component {
   componentDidMount = () => {};
 
   render() {
-    console.log(this.props.draftItems);
     if (!this.props.draftItems.draft.length) {
       return (
         <div>

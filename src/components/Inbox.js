@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Mail from './Mail';
-import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 
 //Container Component Inbox
 class Inbox extends Component {
@@ -24,7 +24,7 @@ class Inbox extends Component {
 
   render() {
     const composeStyles = {
-      marginLeft: '20px',
+      marginLeft: '50px',
     };
     const divStyles = {
       float: 'left',
@@ -49,32 +49,30 @@ class Inbox extends Component {
         </div>
       );
     return (
-      <div>
-        <ul id="items">
-          <h2>Inbox</h2>
-          {itemsPaged.map((item, i) => <Mail item={item} key={i} />)}
-          {itemsCurrentPage !== 0 && (
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={this.handlePrevious}
-              className="button"
-            >
-              Previous
-            </Button>
-          )}
-          {itemsCurrentPage !== itemsLastPage && (
-            <Button
-              style={composeStyles}
-              variant="contained"
-              color="secondary"
-              onClick={this.handleNext}
-              className="button"
-            >
-              Next
-            </Button>
-          )}
-        </ul>
+      <div style={composeStyles}>
+        <h2>Inbox</h2>
+        {itemsPaged.map((item, i) => <Mail item={item} key={i} />)}
+        {itemsCurrentPage !== 0 && (
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={this.handlePrevious}
+            className="button"
+          >
+            Previous
+          </Button>
+        )}
+        {itemsCurrentPage !== itemsLastPage && (
+          <Button
+            style={composeStyles}
+            variant="contained"
+            color="secondary"
+            onClick={this.handleNext}
+            className="button"
+          >
+            Next
+          </Button>
+        )}
       </div>
     );
   }

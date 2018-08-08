@@ -19,6 +19,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   fetchItems: fromItemsActions.fetchItems,
   addMailToDraft: draftActions.addMailToDraft,
+  updateMailToDraft: draftActions.updateMailToDraft,
+  removeMailFromDraft: draftActions.removeMailFromDraft,
   addMailToSent: sentActions.addMailToSent,
 };
 

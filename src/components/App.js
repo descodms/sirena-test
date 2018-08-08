@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Navigation from './Navigation';
 import Login from './Login';
+import Inbox from './Inbox';
 import firebase from 'firebase';
 import base, { firebaseApp } from '../base';
 import Button from '@material-ui/core/Button';

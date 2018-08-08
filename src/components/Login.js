@@ -23,9 +23,15 @@ class Login extends React.Component {
   };
 
   render() {
+    const loginStyles = {
+      fontSize: '2rem',
+    };
+    const messageStyles = {
+      color: 'red',
+    };
     return (
       <div>
-        <h2>Login</h2>
+        <Typography style={loginStyles}>Login</Typography>
         <form onSubmit={this.handleFormEvent}>
           <Input
             name="email"
@@ -36,7 +42,7 @@ class Login extends React.Component {
           <Input
             name="password"
             inputRef={this.passRef}
-            type="text"
+            type="password"
             placeholder="Password"
           />
           <Button color="secondary" variant="contained" type="submit">
@@ -44,7 +50,7 @@ class Login extends React.Component {
           </Button>
         </form>
         <div name="error">
-          <Typography>{this.props.message}</Typography>
+          <Typography style={messageStyles}>{this.props.message}</Typography>
         </div>
       </div>
     );

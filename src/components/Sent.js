@@ -12,8 +12,7 @@ class Sent extends Component {
   componentDidMount = () => {};
 
   render() {
-    console.log(this.props.sentItems);
-
+    console.log(this.props);
     const sentItem = localStorage.getItem('sentItems');
     if (!this.props.sentItems.sent.length) {
       return (

@@ -22,11 +22,9 @@ const Mail = ({ item }) => (
             style={{ textDecoration: 'none' }}
             to={`/view/${item.id || 'default'}`}
           >
-            <Typography>{`${item.firstName || 'default'} - ${item.lastName ||
-              'default'}`}</Typography>
-            <Typography>{item.email || 'default'}</Typography>
-            <Typography>{item.subject || 'default'}</Typography>
-            <Typography>{item.message || 'default'}</Typography>
+            <Typography>{item.email || ''}</Typography>
+            <Typography>{item.subject || ''}</Typography>
+            <Typography>{item.message || ''}</Typography>
           </Link>
         </CardContent>
       </Card>

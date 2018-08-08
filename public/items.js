@@ -1,4 +1,4 @@
-export const ITEMS = [
+[
   {
     id: 1,
     firstName: 'Amy',
@@ -9042,32 +9042,4 @@ export const ITEMS = [
       'Proin risus. Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante.',
     subject: 'In quis justo.',
   },
-];
-
-export const fetchItems = params => {
-  const createPromise = response =>
-    new Promise(resolve => {
-      window.setTimeout(() => resolve(response), 1000);
-    });
-  if (params === undefined) {
-    const response = {
-      count: ITEMS.length,
-      results: ITEMS,
-    };
-    return createPromise(response);
-  }
-  const { limit } = params;
-  const offset = params.offset !== undefined ? params.offset : 0;
-  if (limit === undefined) {
-    const response = {
-      count: ITEMS.length,
-      results: ITEMS.slice(offset),
-    };
-    return createPromise(response);
-  }
-  const defaultResponse = {
-    count: ITEMS.length,
-    results: ITEMS.slice(offset, offset + limit),
-  };
-  return createPromise(defaultResponse);
-};
+]
