@@ -23,11 +23,14 @@ const nameStyles = {
   fontWeight: '500',
 };
 //Presentational Component Mail
-const Mail = ({ item, instance }) => (
+const Mail = ({ item, instance, index }) => (
   <div>
     <Link
       style={{ textDecoration: 'none' }}
-      to={`/view/${item.id || 'default'}/${instance}`}
+      to={{
+        pathname: `/view/${item.id || 'default'}`,
+        state: { item, instance, index },
+      }}
     >
       <List>
         <Card style={styles} key={item.id} className="item">

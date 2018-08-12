@@ -98,7 +98,7 @@ class Inbox extends Component {
       <div style={composeStyles}>
         <h2 style={textCap}>{this.state.instance}</h2>
         {itemsPaged.map((item, i) => (
-          <Mail item={item} key={i} instance={this.state.instance} />
+          <Mail item={item} key={i} index={i} instance={this.state.instance} />
         ))}
         {itemsCurrentPage !== 0 && (
           <Button

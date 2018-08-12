@@ -78,13 +78,13 @@ class Navigation extends React.Component {
               )}
             />
             <Route
-              path="/view/:mailId/:instance"
+              path="/view/:mailId"
               render={({ match }) => (
                 <Compose props={this.props} params={match.params} />
               )}
             />
             <Route
-              path="/compose"
+              path="/compose/"
               render={({ match }) => (
                 <Compose props={this.props} params={match.params} />
               )}
