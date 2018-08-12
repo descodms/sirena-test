@@ -32,6 +32,37 @@ class Compose extends Component {
   messageRef = React.createRef();
   subjectRef = React.createRef();
 
+  //? No me gusta: mejorar
+  hackItem = () => {
+    const props = this.props.props;
+    const instance = this.props.params.instance;
+    const mailId = parseInt(this.props.params.mailId, 10);
+    let i;
+    let item;
+    this.readOnly = true;
+    if (instance === 'inbox') {
+      i = props.itemsPaged.findIndex(item => item.id === mailId);
+      item = props.itemsPaged[i] || [];
+    }
+    if (instance === 'sent') {
+      i = props.sentItems.findIndex(item => item.id === mailId);
+      item = props.sentItems[i] || [];
+    }
+    if (instance === 'results') {
+      i = props.results.findIndex(item => item.id === mailId);
+      item = props.results[i] || [];
+    }
+    if (instance === 'draft') {
+      i = props.draftItems.findIndex(item => item.id === mailId);
+      item = props.draftItems[i] || [];
+      this.readOnly = false;
+      this.setState({ mailId: item.id, index: i });
+      this.setDraftInterval();
+    }
+    this.setState({ firstName: item.firstName, lastName: item.lastName });
+    return item;
+  };
+
   setDraftInterval = () => {
     const { updateMailToDraft } = this.props.props;
     this.interval = setInterval(() => {
@@ -87,7 +118,7 @@ class Compose extends Component {
       message: item.message,
     });
 
-    //if readOnly true then can't edit the form
+    //if readOnly true then cant edit the form
     if (this.readOnly) {
       this.emailRef.current.refInput.setAttribute('readOnly', this.readOnly);
       this.subjectRef.current.setAttribute('readOnly', this.readOnly);
