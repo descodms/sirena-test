@@ -3,6 +3,7 @@ import Mail from './Mail';
 
 class Draft extends Component {
   render() {
+    console.log(this.props);
     const styles = {
       marginLeft: '50px',
     };

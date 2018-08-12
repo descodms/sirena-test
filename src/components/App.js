@@ -5,7 +5,6 @@ import Login from './Login';
 import firebase from 'firebase';
 import { firebaseApp } from '../base';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Route } from 'react-router-dom';
 
 // main container component
 class App extends React.Component {

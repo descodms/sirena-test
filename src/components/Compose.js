@@ -27,16 +27,6 @@ class Compose extends Component {
     this.readOnly = false;
   }
 
-  // shouldComponentUpdate = () => {
-  //   console.log('should?');
-  //   console.log(this.props.params);
-  //   // if (!this.props.params.mailId) {
-  //   //   return false;
-  //   // }
-  //   // return true;
-  //   // this.reload();
-  // };
-
   //create refs forms
   emailRef = React.createRef();
   messageRef = React.createRef();
@@ -87,7 +77,7 @@ class Compose extends Component {
         this.state.subject,
         this.state.message,
       );
-    }, 10000);
+    }, 2000);
   };
 
   filterData = data => {
@@ -174,13 +164,6 @@ class Compose extends Component {
     clearInterval(this.interval);
   }
 
-  /* id: 1,
-    firstName: 
-    lastName: 
-    email:
-    message:
-    subject: */
-
   //manage the form
   handleSubmit = () => {
     const { addMailToSent, removeMailFromDraft } = this.props.props;
@@ -195,7 +178,7 @@ class Compose extends Component {
     );
     //call to Draft's action
     removeMailFromDraft(this.state.mailId, this.state.index);
-    //create a new Mail
+    clearInterval(this.interval);
     this.statusMessage = 'Mail Enviado!';
   };
 
@@ -235,7 +218,6 @@ class Compose extends Component {
         <CardContent>
           <TextInput
             style={autoInputStyles}
-            // onRequestOptions={this.handleRequestOptions}
             options={this.emails}
             trigger=""
             Component="input"
@@ -245,14 +227,6 @@ class Compose extends Component {
             value={this.state.email}
             onChange={this.handleInputChange}
           />
-          {/* <Input
-            style={inputStyles}
-            type="text"
-            inputRef={this.emailRef}
-            placeholder="to"
-            value={this.state.toValue}
-            onChange={this.handleInputChange}
-          /> */}
         </CardContent>
         <CardContent>
           <Input
