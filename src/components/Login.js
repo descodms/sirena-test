@@ -13,8 +13,6 @@ class Login extends React.Component {
   passRef = React.createRef();
 
   handleFormEvent = event => {
-    // console.log(this.handleFormEvent);
-    // console.log(this.emailRef.current.value);
     event.preventDefault();
     this.props.authenticate(
       this.emailRef.current.value,

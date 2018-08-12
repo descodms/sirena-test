@@ -5,13 +5,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
-/* id: 1,
-    firstName: 
-    lastName: 
-    email:
-    message:
-    subject: */
-
 const styles = {
   height: '131px',
 };
@@ -30,11 +23,11 @@ const nameStyles = {
   fontWeight: '500',
 };
 //Presentational Component Mail
-const Mail = ({ item }) => (
+const Mail = ({ item, instance }) => (
   <div>
     <Link
       style={{ textDecoration: 'none' }}
-      to={`/view/${item.id || 'default'}`}
+      to={`/view/${item.id || 'default'}/${instance}`}
     >
       <List>
         <Card style={styles} key={item.id} className="item">

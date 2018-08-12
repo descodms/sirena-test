@@ -1,10 +1,7 @@
 import React from 'react';
-import { Redirect, Route, Link } from 'react-router-dom';
-import Inbox from './Inbox';
-import Draft from './Draft';
-import Sent from './Sent';
+import { Redirect, Switch, Route, Link } from 'react-router-dom';
+import Main from './Main';
 import Compose from './Compose';
-import Search from './Search';
 import { Button } from '@material-ui/core';
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
@@ -12,7 +9,6 @@ import SentIcon from '@material-ui/icons/Send';
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { Fragment } from 'react';
 import SearchBox from './SearchBox';
-import { Switch } from 'react-router-dom';
 class Navigation extends React.Component {
   handleClick = e => {
     this.props.removeSearchResults(this.props.results);
@@ -33,7 +29,7 @@ class Navigation extends React.Component {
     return (
       <Fragment>
         <div style={divNav} onClick={this.handleClick}>
-          <Link style={{ textDecoration: 'none' }} to="/inbox">
+          <Link style={{ textDecoration: 'none' }} to="/main/inbox">
             <ListItem button>
               <ListItemIcon>
                 <InboxIcon />
@@ -41,7 +37,7 @@ class Navigation extends React.Component {
               <ListItemText primary="Inbox" />
             </ListItem>
           </Link>
-          <Link style={{ textDecoration: 'none' }} to="/draft">
+          <Link style={{ textDecoration: 'none' }} to="/main/draft">
             <ListItem button>
               <ListItemIcon>
                 <DraftsIcon />
@@ -49,7 +45,7 @@ class Navigation extends React.Component {
               <ListItemText primary="Drafts" />
             </ListItem>
           </Link>
-          <Link style={{ textDecoration: 'none' }} to="/sent">
+          <Link style={{ textDecoration: 'none' }} to="/main/sent">
             <ListItem button>
               <ListItemIcon>
                 <SentIcon />
@@ -73,15 +69,16 @@ class Navigation extends React.Component {
         </div>
         <div style={divContent}>
           <SearchBox {...this.props} />
-          <Redirect from="/" to="/inbox" />
+          <Redirect from="/" to="/main/inbox" />
           <Switch>
             <Route
-              path="/search"
-              render={props => <Search {...this.props} />}
+              path="/main/:instance"
+              render={({ match }) => (
+                <Main props={this.props} params={match.params} />
+              )}
             />
-            <Route path="/inbox" render={props => <Inbox {...this.props} />} />
             <Route
-              path="/view/:mailId"
+              path="/view/:mailId/:instance"
               render={({ match }) => (
                 <Compose props={this.props} params={match.params} />
               )}
@@ -92,8 +89,6 @@ class Navigation extends React.Component {
                 <Compose props={this.props} params={match.params} />
               )}
             />
-            <Route path="/draft" render={props => <Draft {...this.props} />} />
-            <Route path="/sent" render={props => <Sent {...this.props} />} />
           </Switch>
         </div>
       </Fragment>

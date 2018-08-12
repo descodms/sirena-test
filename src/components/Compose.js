@@ -3,7 +3,7 @@ import { Button, Input } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { ITEMS } from '../apis/items';
+import { inbox } from '../apis/inbox';
 import TextInput from 'react-autocomplete-input';
 import 'react-autocomplete-input/dist/bundle.css';
 import '../css/autocomplete.css';
@@ -35,27 +35,29 @@ class Compose extends Component {
   //? No me gusta: mejorar
   hackItem = () => {
     const props = this.props.props;
-    let mailId = parseInt(this.props.params.mailId, 10);
-    let i = props.itemsPaged.findIndex(item => item.id === mailId);
-    let item = props.itemsPaged[i] || [];
-    if (item.length === 0) {
+    const instance = this.props.params.instance;
+    const mailId = parseInt(this.props.params.mailId, 10);
+    let i;
+    let item;
+    this.readOnly = true;
+    if (instance === 'inbox') {
+      i = props.itemsPaged.findIndex(item => item.id === mailId);
+      item = props.itemsPaged[i] || [];
+    }
+    if (instance === 'sent') {
       i = props.sentItems.findIndex(item => item.id === mailId);
       item = props.sentItems[i] || [];
-      this.readOnly = true;
-      if (item.length === 0) {
-        i = props.draftItems.findIndex(item => item.id === mailId);
-        item = props.draftItems[i] || [];
-        this.setState({ mailId: item.id, index: i });
-        this.setDraftInterval();
-        this.readOnly = false;
-        if (item.length === 0) {
-          i = props.results.findIndex(item => item.id === mailId);
-          item = props.results[i] || [];
-          this.readOnly = true;
-        }
-      }
-    } else {
-      this.readOnly = true;
+    }
+    if (instance === 'results') {
+      i = props.results.findIndex(item => item.id === mailId);
+      item = props.results[i] || [];
+    }
+    if (instance === 'draft') {
+      i = props.draftItems.findIndex(item => item.id === mailId);
+      item = props.draftItems[i] || [];
+      this.readOnly = false;
+      this.setState({ mailId: item.id, index: i });
+      this.setDraftInterval();
     }
     this.setState({ firstName: item.firstName, lastName: item.lastName });
     return item;
@@ -90,11 +92,12 @@ class Compose extends Component {
   };
 
   componentWillMount() {
-    this.filterData(ITEMS);
+    this.filterData(inbox);
   }
 
   componentDidMount() {
     if (this.props.params.mailId === undefined) {
+      this.readOnly = false;
       return;
     }
     //Compose with data: Inbox, Draft o Sent
@@ -120,7 +123,7 @@ class Compose extends Component {
       }
     };
 
-    const result = ITEMS.filter(filter);
+    const result = inbox.filter(filter);
     return result;
   };
 
@@ -184,8 +187,6 @@ class Compose extends Component {
     clearInterval(this.interval);
     this.statusMessage = 'Mail Enviado!';
   };
-
-  handleRequestOptions = part => {};
 
   render() {
     //some rushed styles

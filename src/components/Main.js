@@ -2,22 +2,52 @@ import React, { Component } from 'react';
 import Mail from './Mail';
 import { Button } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+import { inbox } from '../apis/inbox';
 
 //Container Component Inbox
 class Inbox extends Component {
+  state = {
+    instance: 'inbox',
+  };
+
   componentDidMount = () => {
-    const { fetchItems, itemsCurrentPage } = this.props;
-    fetchItems(itemsCurrentPage);
+    this.setState({ instance: this.props.params.instance });
+    this.fetchInstance(this.props.params.instace);
+  };
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevProps.params.instance !== this.props.params.instance) {
+      this.setState({ instance: this.props.params.instance });
+      this.fetchInstance(this.props.params.instace);
+    }
+  };
+
+  fetchInstance = instance => {
+    if (this.props.params.instance === 'inbox') {
+      this.items = inbox;
+    }
+    if (this.props.params.instance === 'draft') {
+      this.items = this.props.props.draftItems;
+    }
+    if (this.props.params.instance === 'sent') {
+      this.items = this.props.props.sentItems;
+    }
+    if (this.props.params.instance === 'results') {
+      this.items = this.props.props.results;
+    }
+
+    const { fetchItems, itemsCurrentPage } = this.props.props;
+    fetchItems(0, this.items);
   };
 
   handleNext = () => {
-    const { fetchItems, itemsCurrentPage } = this.props;
-    fetchItems(itemsCurrentPage + 1);
+    const { fetchItems, itemsCurrentPage } = this.props.props;
+    fetchItems(itemsCurrentPage + 1, this.items);
   };
 
   handlePrevious = () => {
-    const { fetchItems, itemsCurrentPage } = this.props;
-    fetchItems(itemsCurrentPage - 1);
+    const { fetchItems, itemsCurrentPage } = this.props.props;
+    fetchItems(itemsCurrentPage - 1, this.items);
   };
 
   render() {
@@ -34,13 +64,16 @@ class Inbox extends Component {
     const nextStyles = {
       float: 'right',
     };
+    const textCap = {
+      textTransform: 'capitalize',
+    };
     const {
       itemsPaged,
       itemsCurrentPage,
       itemsErrored,
       itemsLastPage,
       itemsRequested,
-    } = this.props;
+    } = this.props.props;
     if (itemsRequested)
       return (
         <div style={divStyles}>
@@ -53,11 +86,19 @@ class Inbox extends Component {
           <Typography>Errored</Typography>{' '}
         </div>
       );
+    if (!itemsPaged.length) {
+      return (
+        <div style={divStyles}>
+          <h2 style={textCap}>{this.state.instance}</h2>
+          <Typography>No hay mensajes</Typography>{' '}
+        </div>
+      );
+    }
     return (
       <div style={composeStyles}>
-        <h2>Inbox</h2>
+        <h2 style={textCap}>{this.state.instance}</h2>
         {itemsPaged.map((item, i) => (
-          <Mail item={item} key={i} />
+          <Mail item={item} key={i} instance={this.state.instance} />
         ))}
         {itemsCurrentPage !== 0 && (
           <Button

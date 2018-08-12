@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import * as fromItems from '../apis/items';
 
 const PAGE_SIZE = 4;
 
@@ -59,19 +58,21 @@ const setItemsCurrentPage = page => ({
   type: SET_ITEMS_CURRENT_PAGE,
 });
 
-export const fetchItems = page => (dispatch, getState) => {
+export const fetchItems = (page, name) => (dispatch, getState) => {
   const state = getState();
   const offset = page * PAGE_SIZE;
   dispatch(setItemsCurrentPage(page));
-  if (getIsPageFetched(state, page)) {
-    return;
-  }
+  // if (getIsPageFetched(state, page)) {
+  //   return;
+  // }
   dispatch(fetchItemsRequest());
-  fromItems
-    .fetchItems({
+  fetchItemsInternal(
+    {
       limit: PAGE_SIZE,
       offset,
-    })
+    },
+    name,
+  )
     .then(response => {
       const pageCount = Math.ceil(response.count / PAGE_SIZE);
       dispatch(
@@ -83,4 +84,32 @@ export const fetchItems = page => (dispatch, getState) => {
       );
     })
     .catch(() => dispatch(fetchItemsResponse('500', true)));
+};
+
+const fetchItemsInternal = (params, instance) => {
+  const createPromise = response =>
+    new Promise(resolve => {
+      window.setTimeout(() => resolve(response), 1000);
+    });
+  if (params === undefined) {
+    const response = {
+      count: instance.length,
+      results: instance,
+    };
+    return createPromise(response);
+  }
+  const { limit } = params;
+  const offset = params.offset !== undefined ? params.offset : 0;
+  if (limit === undefined) {
+    const response = {
+      count: instance.length,
+      results: instance.slice(offset),
+    };
+    return createPromise(response);
+  }
+  const defaultResponse = {
+    count: instance.length,
+    results: instance.slice(offset, offset + limit),
+  };
+  return createPromise(defaultResponse);
 };

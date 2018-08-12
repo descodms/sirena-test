@@ -6,7 +6,6 @@ const REMOVE_MAIL_FROM_DRAFT = 'REMOVE_MAIL_FROM_DRAFT';
 const postDraft = (state = [], action) => {
   switch (action.type) {
     case ADD_MAIL_TO_DRAFT:
-      //action.id === false, update, no create
       return [
         ...state,
         {
@@ -21,7 +20,17 @@ const postDraft = (state = [], action) => {
     case UPDATE_MAIL_TO_DRAFT:
       return state.map((item, index) => {
         if (item.id === action.id) {
-          return { ...action };
+          return {
+            ...item,
+            ...{
+              id: action.id,
+              firstName: action.firstName,
+              lastName: action.lastName,
+              email: action.email,
+              subject: action.subject,
+              message: action.message,
+            },
+          };
         }
         return item;
       });

@@ -51,7 +51,6 @@ class App extends React.Component {
   render() {
     const Styles = {
       fontFamily: 'Roboto',
-      // backgroundImage: 'url(' + imgUrl + ')',
     };
     const divLogout = {
       float: 'right',
