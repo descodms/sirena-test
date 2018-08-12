@@ -4,14 +4,19 @@ import Inbox from './Inbox';
 import Draft from './Draft';
 import Sent from './Sent';
 import Compose from './Compose';
+import Search from './Search';
 import { Button } from '@material-ui/core';
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SentIcon from '@material-ui/icons/Send';
-import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { Fragment } from 'react';
-import { Grid } from '@material-ui/core/Grid';
+import SearchBox from './SearchBox';
+import { Switch } from 'react-router-dom';
 class Navigation extends React.Component {
+  handleClick = e => {
+    this.props.removeSearchResults(this.props.results);
+  };
   render() {
     const divNav = {
       width: '150px',
@@ -27,7 +32,7 @@ class Navigation extends React.Component {
     const divContent = { width: '500px', float: 'left', marginBottom: '40px' };
     return (
       <Fragment>
-        <div style={divNav}>
+        <div style={divNav} onClick={this.handleClick}>
           <Link style={{ textDecoration: 'none' }} to="/inbox">
             <ListItem button>
               <ListItemIcon>
@@ -67,22 +72,29 @@ class Navigation extends React.Component {
           </Button>
         </div>
         <div style={divContent}>
-          <Redirect to="/inbox" />
-          <Route path="/inbox" render={props => <Inbox {...this.props} />} />
-          <Route
-            path="/view/:mailId"
-            render={({ match, props }) => (
-              <Compose props={this.props} params={match.params} />
-            )}
-          />
-          <Route
-            path="/compose"
-            render={({ match, props }) => (
-              <Compose props={this.props} params={match.params} />
-            )}
-          />
-          <Route path="/draft" render={props => <Draft {...this.props} />} />
-          <Route path="/sent" render={props => <Sent {...this.props} />} />
+          <SearchBox {...this.props} />
+          <Redirect from="/" to="/inbox" />
+          <Switch>
+            <Route
+              path="/search"
+              render={props => <Search {...this.props} />}
+            />
+            <Route path="/inbox" render={props => <Inbox {...this.props} />} />
+            <Route
+              path="/view/:mailId"
+              render={({ match }) => (
+                <Compose props={this.props} params={match.params} />
+              )}
+            />
+            <Route
+              path="/compose"
+              render={({ match }) => (
+                <Compose props={this.props} params={match.params} />
+              )}
+            />
+            <Route path="/draft" render={props => <Draft {...this.props} />} />
+            <Route path="/sent" render={props => <Sent {...this.props} />} />
+          </Switch>
         </div>
       </Fragment>
     );

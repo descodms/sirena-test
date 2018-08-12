@@ -5,13 +5,10 @@ import Login from './Login';
 import firebase from 'firebase';
 import { firebaseApp } from '../base';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { Route } from 'react-router-dom';
 
 // main container component
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   state = {
     uid: null,
     statusLoginMessage: '',
@@ -22,9 +19,6 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    console.log('App component did mount');
-    console.log(this.props);
-    console.log(this.state);
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.authHandler({ user });
@@ -36,10 +30,7 @@ class App extends React.Component {
     firebaseApp
       .auth()
       .signInWithEmailAndPassword(email, pass)
-      .catch(function(error) {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      })
+      .catch(function(error) {})
       .then(this.authHandler);
   };
 
@@ -62,9 +53,6 @@ class App extends React.Component {
     const Styles = {
       fontFamily: 'Roboto',
       // backgroundImage: 'url(' + imgUrl + ')',
-    };
-    const NavStyles = {
-      width: '300px',
     };
     const divLogout = {
       float: 'right',

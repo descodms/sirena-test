@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import Mail from './Mail';
 import { Button } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 
 //Container Component Inbox
 class Inbox extends Component {
   componentDidMount = () => {
     const { fetchItems, itemsCurrentPage } = this.props;
     fetchItems(itemsCurrentPage);
-    console.log('fetchItems');
   };
 
   handleNext = () => {
@@ -30,6 +28,8 @@ class Inbox extends Component {
     };
     const divStyles = {
       float: 'left',
+      marginLeft: '50px',
+      marginTop: '10px',
     };
     const nextStyles = {
       float: 'right',
@@ -49,14 +49,16 @@ class Inbox extends Component {
       );
     if (itemsErrored)
       return (
-        <div>
+        <div style={divStyles}>
           <Typography>Errored</Typography>{' '}
         </div>
       );
     return (
       <div style={composeStyles}>
         <h2>Inbox</h2>
-        {itemsPaged.map((item, i) => <Mail item={item} key={i} />)}
+        {itemsPaged.map((item, i) => (
+          <Mail item={item} key={i} />
+        ))}
         {itemsCurrentPage !== 0 && (
           <Button
             variant="contained"

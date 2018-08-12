@@ -13,13 +13,21 @@ import Typography from '@material-ui/core/Typography';
     subject: */
 
 const styles = {
-  height: '132.5px',
+  height: '131px',
 };
 const cardContentStyles = {
-  paddingTop: '8px',
+  paddingTop: '2px',
 };
 const pStyles = {
   overflow: 'hidden',
+};
+const subjectStyles = {
+  fontSize: '1.1rem',
+  fontWeight: '500',
+};
+const nameStyles = {
+  fontStyle: 'italic',
+  fontWeight: '500',
 };
 //Presentational Component Mail
 const Mail = ({ item }) => (
@@ -31,9 +39,11 @@ const Mail = ({ item }) => (
       <List>
         <Card style={styles} key={item.id} className="item">
           <CardContent style={cardContentStyles}>
-            <Typography>{item.email || ''}</Typography>
-            <Typography>{item.subject || ''}</Typography>
-            <Typography style={pStyles}>{item.message || ''}</Typography>
+            <Typography style={subjectStyles}>{item.subject || ' '}</Typography>
+            <Typography style={nameStyles}>
+              {item.firstName || ' '} {item.lastName || ' '}
+            </Typography>
+            <Typography style={pStyles}>{item.message || ' '}</Typography>
           </CardContent>
         </Card>
       </List>
