@@ -77,7 +77,7 @@ class Compose extends Component {
         this.state.subject,
         this.state.message,
       );
-    }, 2000);
+    }, 10000);
   };
 
   filterData = data => {
@@ -177,7 +177,12 @@ class Compose extends Component {
       this.messageRef.current.value,
     );
     //call to Draft's action
-    removeMailFromDraft(this.state.mailId, this.state.index);
+    console.log(this.state.mailId);
+    console.log(this.state.index);
+    const i = this.props.props.draftItems.findIndex(
+      item => item.id === this.state.mailId,
+    );
+    removeMailFromDraft(this.state.mailId, i);
     clearInterval(this.interval);
     this.statusMessage = 'Mail Enviado!';
   };
