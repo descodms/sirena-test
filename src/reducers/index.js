@@ -1,5 +1,5 @@
 //combine reducers
-import { combineReducers } from '../../../../Library/Caches/typescript/2.9/node_modules/redux';
+import { combineReducers } from 'redux';
 import draft from './draft';
 import sent from './sent';
 import items from './inbox';

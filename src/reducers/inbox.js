@@ -1,4 +1,4 @@
-import { combineReducers } from '../../../../Library/Caches/typescript/2.9/node_modules/redux';
+import { combineReducers } from 'redux';
 
 const FETCH_ITEMS_REQUEST = 'FETCH_ITEMS_REQUEST';
 const FETCH_ITEMS_RESPONSE = 'FETCH_ITEMS_RESPONSE';
