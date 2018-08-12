@@ -177,8 +177,6 @@ class Compose extends Component {
       this.messageRef.current.value,
     );
     //call to Draft's action
-    console.log(this.state.mailId);
-    console.log(this.state.index);
     const i = this.props.props.draftItems.findIndex(
       item => item.id === this.state.mailId,
     );

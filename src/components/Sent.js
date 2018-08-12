@@ -3,8 +3,6 @@ import Mail from './Mail';
 
 class Sent extends Component {
   render() {
-    console.log(this.props);
-
     const styles = { marginLeft: '50px' };
     if (!this.props.sentItems.length) {
       return (
